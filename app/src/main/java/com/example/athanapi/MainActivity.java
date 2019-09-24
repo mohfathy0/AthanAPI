@@ -26,7 +26,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
 
-    TextView textView;
+    TextView textView ,textViewTimeToPray;
     EditText editText;
 
     @Override
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         textView = findViewById(R.id.textviewResponse);
         editText = findViewById(R.id.editTextAddress);
-
+        textViewTimeToPray = findViewById(R.id.textViewTimeToPray);
 
     }
 
@@ -76,23 +76,24 @@ public class MainActivity extends AppCompatActivity {
 
                            switch (prayerTimes.indexOf(prayerTimes.get(x))){
                                case 0:
-                                   sbf.append("It is time to pray Fajer\n");
+                                   textViewTimeToPray.setText("It is time to pray Fajer");
+
                                    prayertimefound=true;
                                    break;
                                case 1:
-                                   sbf.append("It is time to pray Duhr\n");
+                                   textViewTimeToPray.setText("It is time to pray Duhr");
                                    prayertimefound=true;
                                    break;
                                case 2:
-                                   sbf.append("It is time to pray Asr\n");
+                                   textViewTimeToPray.setText("It is time to pray Asr");
                                    prayertimefound=true;
                                    break;
                                case 3:
-                                   sbf.append("It is time to pray Maghrib\n");
+                                   textViewTimeToPray.setText("It is time to pray Maghrib");
                                    prayertimefound=true;
                                    break;
                                case 4:
-                                   sbf.append("It is time to pray Ishaa\n");
+                                   textViewTimeToPray.setText("It is time to pray Ishaa");
                                    prayertimefound=true;
                                    break;
                            }
@@ -115,13 +116,14 @@ public class MainActivity extends AppCompatActivity {
                 }
 
 
-                String placeHolder = "\nResponse message: " + response.message() + "\n" +
-                        "Response Code: " + response.code() + "\n" + "\n" +
+                String placeHolder =
                         "Fajr: " + response.body().getData().getTimings().getFajr() + "\n" +
                         "Dhuhr: " + response.body().getData().getTimings().getDhuhr() + "\n" +
                         "Asr: " + response.body().getData().getTimings().getAsr() + "\n" +
                         "Maghrib: " + response.body().getData().getTimings().getMaghrib() + "\n" +
-                        "Isha: " + response.body().getData().getTimings().getIsha();
+                        "Isha: " + response.body().getData().getTimings().getIsha()+ "\n\n" +
+                                "\nResponse message: " + response.message() + "\n" +
+                                "Response Code: " + response.code() ;
                 sbf.append(placeHolder);
                 textView.setText(sbf);
             }
